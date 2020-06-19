@@ -1,0 +1,26 @@
+.question {
+    background-color: aqua;
+    margin-bottom: 10px;
+}
+
+.submit-btn {
+    background-color: chartreuse;
+}
+
+.answer {
+    background-color: cornflowerblue;
+}
+
+.answer:hover {
+    background-color: coral;
+    cursor: pointer;
+}
+
+.red {
+    color: red;
+}
+
+.submit-btn:hover {
+    background-color: darkslategray;
+    cursor: pointer;
+}

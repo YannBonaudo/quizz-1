@@ -1,0 +1,39 @@
+{
+    "questions": [
+        {
+            "id": 1,
+            "type": "multiple",
+            "question": "Quelle est la capitale de l'Afrique du Sud ?",
+            "answers": [
+                "Pretoria",
+                "Thimbu",
+                "Le Wakanda"
+            ],
+            "correctAnswers": "Pretoria"
+        },
+        {
+            "id": 2,
+            "type": "multiple",
+            "question": "Quelle est la capitale de la France",
+            "answers": [
+                "Lyon",
+                "Paris",
+                "Marseille",
+                "Perpignan"
+            ],
+            "correctAnswers": "Paris"
+        },
+        {
+            "id": 3,
+            "type": "bool",
+            "question": "Rabire porte un T-shirt rouge ?",
+            "correctAnswers": false
+        },
+        {
+            "id": 4,
+            "type": "bool",
+            "question": "Yann est le frère de Cédric",
+            "correctAnswers": true
+        }
+    ]
+}

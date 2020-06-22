@@ -1,47 +1,48 @@
-import React, { useState, useEffect } from 'react'
-import './App.css'
-import Question from './components/Question'
-import axios from 'axios'
-
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import Question from "./components/Question";
+import axios from "axios";
+import AddQuestion from "./components/AddQuestion";
 function App() {
+    const [goodAnswersNumber, setGoodAnswersNumber] = useState(0);
+    const [badAnswersNumber, setBadAnswersNumber] = useState(0);
+    const [seconds, setSeconds] = useState(60);
+    const [questions, setQuestions] = useState([]);
 
-    const [goodAnswersNumber, setGoodAnswersNumber] = useState(0)
-    const [badAnswersNumber, setBadAnswersNumber] = useState(0)
-    const [seconds, setSeconds] = useState(60)
-    const [questions, setQuestions] = useState ([])
-    
-    const questionsLefts = Object.keys(questions).length - goodAnswersNumber
+    const questionsLefts = Object.keys(questions).length - goodAnswersNumber;
 
     //console.log(QuestionsData)
-    useEffect(()=> {
-        axios.get('http://localhost:3001/questions')
-            .then(res => {
+    useEffect(() => {
+        axios
+            .get("http://localhost:3001/questions")
+            .then((res) => {
                 //console.log(res.data)
-                setQuestions(res.data)
+                setQuestions(res.data);
             })
-            .catch(err => {
-                console.log(err)
-        })
-    },[])
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
 
     function refreshPage() {
         window.location.reload(false);
-      }
+    }
 
-    useEffect(()=>{
+    useEffect(() => {
         let interval = null;
-        if(seconds > 0){
+        if (seconds > 0) {
             interval = setInterval(() => {
-                setSeconds(seconds => seconds - 1 );
+                setSeconds((seconds) => seconds - 1);
             }, 1000);
         } else {
             clearInterval(interval);
-            alert("Tu n'as pas fini le quizz dans le temps imparti ! Retente ta chance.")
-            refreshPage()
+            alert(
+                "Tu n'as pas fini le quizz dans le temps imparti ! Retente ta chance."
+            );
+            refreshPage();
         }
         return () => clearInterval(interval);
     }, [seconds]);
-
 
     return (
         <div className="app">
@@ -50,22 +51,20 @@ function App() {
             <h4>Nombre de bonnes réponses : {goodAnswersNumber}</h4>
             <h4>Nombre de mauvaises tentatives : {badAnswersNumber}</h4>
             <h4>Nombre de questions restantes : {questionsLefts}</h4>
-            
-            {
-                questions.map(
-                    question =>
-                    <Question
-                        key={question.id}
-                        question={question}
-                        goodAnswersNumber={goodAnswersNumber}
-                        setGoodAnswersNumber={setGoodAnswersNumber}
-                        badAnswersNumber={badAnswersNumber}
-                        setBadAnswersNumber={setBadAnswersNumber}
-                    />
-                )
-            }
+
+            {questions.map((question) => (
+                <Question
+                    key={question.id}
+                    question={question}
+                    goodAnswersNumber={goodAnswersNumber}
+                    setGoodAnswersNumber={setGoodAnswersNumber}
+                    badAnswersNumber={badAnswersNumber}
+                    setBadAnswersNumber={setBadAnswersNumber}
+                />
+            ))}
+            <AddQuestion />
         </div>
-    )
+    );
 }
 
-export default App
+export default App;
